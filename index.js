@@ -247,13 +247,14 @@
         }
     }
 
-    // Infinite scroll
+    // Infinite scroll - Optimized with throttling
     function handleScroll() {
         if (state.isLoading || !state.hasMore) return;
         
         const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
         
-        if (scrollTop + clientHeight >= scrollHeight - 100) {
+        // Increase threshold to reduce scroll event frequency
+        if (scrollTop + clientHeight >= scrollHeight - 300) {
             loadMoreData();
         }
     }

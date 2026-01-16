@@ -110,11 +110,11 @@ body {
 }
 
 main {
-    background-image: url(images/presentation-financial-project.jpg);
+    background-image: url(https://res.cloudinary.com/dw1nrygug/image/upload/v1768547674/presentation-financial-project_1_jvisjc.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-
-
+    background-attachment: fixed; /* Prevents background movement during scroll */
+    will-change: transform; /* Optimize for transforms */
 }
 
 .main-overlay {
@@ -197,7 +197,9 @@ h1 {
     display: flex;
     width: calc(250px * 8);
     /* Adjust based on logo width * total logos */
-    animation: scroll 30s linear infinite;
+    animation: scroll 60s linear infinite; /* Slower animation for better performance */
+    will-change: transform; /* Optimize for transforms */
+    transform: translate3d(0, 0, 0); /* Force hardware acceleration */
 }
 
 .logo-slide {
@@ -237,11 +239,6 @@ h1 {
 /* Pause animation on hover for better UX */
 .carousel-track:hover {
     animation-play-state: paused;
-}
-
-/* Add will-change for smoother animations */
-.carousel-track {
-    will-change: transform;
 }
 
 /* Mobile Adjustment */
@@ -323,6 +320,7 @@ h1 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    will-change: transform; /* Optimize for transforms */
 }
 
 .category-card:hover {
@@ -439,6 +437,7 @@ h1 {
     display: flex;
     flex-direction: column;
     transition: box-shadow 0.3s ease;
+    will-change: transform; /* Optimize for transforms */
 }
 
 .franchise-card:hover {
@@ -537,7 +536,7 @@ h1 {
 
 .why-choose-us {
     background-color: #1e2640;
-    background-image: url('images/cropped-colleagues-generating-business-ideas.jpg');
+    background-image: url(https://res.cloudinary.com/dw1nrygug/image/upload/v1768547987/cropped-colleagues-generating-business-ideas_1_zfmznk.jpg);
     background-size: cover;
     /* Navy background from image */
     color: white;
@@ -725,6 +724,7 @@ h1 {
 .slider-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    will-change: transform; /* Optimize for transforms */
 }
 
 .testimonial-card {
@@ -850,6 +850,7 @@ h1 {
 .slider-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    will-change: transform; /* Optimize for transforms */
 }
 
 .testi-card {
@@ -1222,6 +1223,7 @@ h1 {
     padding: 20px;
     transition: transform 0.3s ease;
     text-align: left;
+    will-change: transform; /* Optimize for transforms */
 }
 
 .card:hover {
