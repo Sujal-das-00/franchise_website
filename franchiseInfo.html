@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Franchise detail page with optimized loading performance">
+    <title>Franchise Detail - JSM Franchising</title>
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1e2640;
+            --green: #1a7b41;
+            --light-green: #38a169;
+            --light-gray: #f8f9fa;
+            --header-bg: #e8f3e9;
+            --text-color: #333;
+            --primary-green: #179248;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Main Header Styles */
+        .main-header {
+            background-color: var(--header-bg);
+            padding: 15px 0;
+            width: 100%;
+        }
+
+        .header-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .logo img {
+            height: 55px;
+            display: block;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu ul li a:hover {
+            color: var(--primary-green);
+        }
+
+        .search-link i {
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .btn-talk {
+            color: #1a2b3c;
+            background-color: #ffff;
+            border: 1px solid var(--primary-green);
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-talk:hover {
+            background-color: var(--primary-green);
+            color: #fff;
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+        }
+
+        /* Showcase Section */
+        .brand-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .brand-logo-box {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            padding: 20px;
+        }
+
+        .brand-logo-box img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .brand-description {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .brand-description h3 {
+            margin-top: 0;
+            color: var(--navy);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        /* Loading States */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes skeleton-loading {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .skeleton-line {
+            height: 16px;
+            margin-bottom: 10px;
+        }
+
+        .skeleton-title {
+            height: 24px;
+            width: 60%;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-image {
+            height: 300px;
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 30px 0;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            border-right: 1px solid #eee;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--navy);
+        }
+
+        /* Explore Others Grid */
+        .explore-section {
+            padding-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .underline {
+            width: 50px;
+            height: 3px;
+            background: #ff4d4d;
+            margin-bottom: 30px;
+        }
+
+        .franchise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        /* Card Styles */
+        .card {
+            border: 1px solid #fce4ec;
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s;
+            background: #fff;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-logo-placeholder {
+            height: 80px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .card-logo-placeholder img {
+            max-width: 70%;
+        }
+
+        .card-cat {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .card-name {
+            font-size: 1.2rem;
+            margin: 5px 0 15px 0;
+            color: var(--navy);
+        }
+
+        .card-stats-list {
+            font-size: 13px;
+            color: #555;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .card-stats-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .know-more-btn {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--green);
+            background: none;
+            color: var(--green);
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .know-more-btn:hover {
+            background: var(--green);
+            color: #fff;
+        }
+
+        /* Collaboration Section */
+        .collab-section {
+            background: #fff;
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .collab-img {
+            flex: 1;
+            position: relative;
+        }
+
+        .collab-img img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .collab-content {
+            flex: 1;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 17.5px;
+            top: 35px;
+            width: 2px;
+            height: 25px;
+            background: var(--light-green);
+        }
+
+        .num {
+            width: 35px;
+            height: 35px;
+            background: var(--light-green);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            z-index: 2;
+        }
+
+        .step p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--navy);
+        }
+
+        .send-btn {
+            background: var(--green);
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 900px) {
+
+            .brand-showcase,
+            .collab-section {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+        }
+
+        .site-footer {
+            background: #1e2640;
+            color: white;
+            padding: 20px 5%;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            background: white;
+            color: #1e2640;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="JSM Franchising">
+            </div>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Business Assessment</a></li>
+                    <li><a href="#">Funding Calculator</a></li>
+                    <li>
+                        <a href="searchPage.html" class="search-link"> Search
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-cta">
+                <button class="btn-talk">Let's Talk</button>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <section class="brand-showcase">
+            <div class="brand-logo-box" id="main-logo-container">
+                <img id="main-brand-logo" src="" alt="" loading="lazy">
+            </div>
+            <div class="brand-description">
+                <h3 id="brand-header-title">About Brand</h3>
+                <p id="brand-desc-text">Loading description...</p>
+            </div>
+        </section>
+
+        <section class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-label">Average Investment</div>
+                <div class="stat-value" id="stat-avg">$0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Minimum Investment</div>
+                <div class="stat-value" id="stat-min">$0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Min. Liquidity</div>
+                <div class="stat-value" id="stat-liq">$0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Year of Establishment</div>
+                <div class="stat-value" id="stat-year">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">No of Outlets</div>
+                <div class="stat-value" id="stat-outlets">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">In House Financing</div>
+                <div class="stat-value" id="stat-finance">No</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Coaching</div>
+                <div class="stat-value" id="stat-coaching">No</div>
+            </div>
+        </section>
+
+        <section class="explore-section">
+            <div class="section-title">Explore other categories</div>
+            <div class="underline"></div>
+            <div class="franchise-grid" id="explore-grid">
+            </div>
+        </section>
+
+        <section class="collab-section">
+            <div class="collab-img">
+                <img src="images/lady.png" alt="Consultant">
+            </div>
+            <div class="collab-content">
+                <span style="font-weight: bold; font-size: 14px; color: #666;">CONTACT US</span>
+                <h2 style="font-size: 2.5rem; color: var(--navy); margin: 10px 0 40px 0;">Let's Collaborate Now!</h2>
+                <div class="step">
+                    <div class="num">1</div>
+                    <p>Initial Discovery & Fit</p>
+                </div>
+                <div class="step">
+                    <div class="num">2</div>
+                    <p>Franchise Strategy & Research</p>
+                </div>
+                <div class="step">
+                    <div class="num">3</div>
+                    <p>Financial Planning & Funding</p>
+                </div>
+                <div class="step">
+                    <div class="num">4</div>
+                    <p>Franchise Evaluation & Due Diligence</p>
+                </div>
+                <div class="step">
+                    <div class="num">5</div>
+                    <p>Final Selection & Onboarding</p>
+                </div>
+                <button class="send-btn"
+                    onclick="location.href='https://meetings.hubspot.com/jose-jsm/jose-meeting'">Send Message</button>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <img src="images/logo.png" alt="JSM Franchising Logo" class="footer-logo" width="90px">
+            </div>
+            <div class="footer-center">
+                <p>Copyright JSM Franchising. All right reserved | Designed by Sual das</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms</a>
+                <a href="#">Get in Touch</a>
+            </div>
+            <div class="footer-socials">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">in</a>
+                <a href="#" class="social-icon">ig</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Performance monitoring
+        const performanceStart = performance.now();
+
+        async function initPage() {
+            try {
+                // Show loading state
+                showLoadingState();
+
+                const response = await fetch('franchises.json');
+                const data = await response.json();
+
+                // 1. Get Franchise from URL (?id=X)
+                const urlParams = new URLSearchParams(window.location.search);
+                const brandId = parseInt(urlParams.get('id')) || 0;
+                const brand = data.find(b => b.id === brandId) || data[0];
+
+                // 2. Populate Main Detail
+                const mainLogo = document.getElementById('main-brand-logo');
+                mainLogo.src = brand.logo;
+                mainLogo.onload = () => {
+                    // Remove loading state once main image loads
+                    hideLoadingState();
+                    // Log performance metrics
+                    const loadTime = performance.now() - performanceStart;
+                    console.log(`Franchise page loaded in ${loadTime.toFixed(2)}ms`);
+                };
+
+                document.getElementById('brand-header-title').innerText = `About Brand - ${brand.name}`;
+                document.getElementById('brand-desc-text').innerHTML = `<strong>At ${brand.name}</strong>, ${brand.description}`;
+
+                document.getElementById('stat-avg').innerText = brand.avgInvestment;
+                document.getElementById('stat-min').innerText = brand.minInvestment;
+                document.getElementById('stat-liq').innerText = brand.minLiquidity;
+                document.getElementById('stat-year').innerText = brand.yearEstablished;
+                document.getElementById('stat-outlets').innerText = brand.outlets;
+                document.getElementById('stat-finance').innerText = brand.inHouseFinancing;
+                document.getElementById('stat-coaching').innerText = brand.coaching;
+
+                // 3. Generate Random "Explore" Cards (4 unique randoms)
+                const grid = document.getElementById('explore-grid');
+                let randomItems = [];
+                let availableIndices = data.filter(item => item.id !== brandId);
+
+                for (let i = 0; i < 4; i++) {
+                    if (availableIndices.length === 0) break;
+                    const randomIndex = Math.floor(Math.random() * availableIndices.length);
+                    randomItems.push(availableIndices.splice(randomIndex, 1)[0]);
+                }
+
+                // Use document fragment for better performance when adding multiple elements
+                const fragment = document.createDocumentFragment();
+                randomItems.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                    <div class="card-logo-placeholder"><img src="${item.logo}" loading="lazy"></div>
+                    <div class="card-cat">${item.category}</div>
+                    <div class="card-name">${item.name}</div>
+                    <ul class="card-stats-list">
+                        <li><span>Average Investment</span> <strong>${item.avgInvestment}</strong></li>
+                        <li><span>Minimum Investment</span> <strong>${item.minInvestment}</strong></li>
+                        <li><span>Franchise outlets</span> <strong>${item.outlets}</strong></li>
+                    </ul>
+                    <button class="know-more-btn" onclick="window.location.href='?id=${item.id}'">Know More</button>
+                `;
+                    fragment.appendChild(card);
+                });
+                grid.appendChild(fragment);
+
+            } catch (error) {
+                console.error("Error loading franchise data:", error);
+                hideLoadingState();
+            }
+        }
+
+        function showLoadingState() {
+            const brandDesc = document.getElementById('brand-desc-text');
+            brandDesc.innerHTML = `
+            <div class="loading-skeleton skeleton-title"></div>
+            <div class="loading-skeleton skeleton-line"></div>
+            <div class="loading-skeleton skeleton-line"></div>
+            <div class="loading-skeleton skeleton-line" style="width: 80%;"></div>
+        `;
+        }
+
+        function hideLoadingState() {
+            const brandDesc = document.getElementById('brand-desc-text');
+            // Only clear if it still contains skeleton (in case data loaded very fast)
+            if (brandDesc.innerHTML.includes('loading-skeleton')) {
+                brandDesc.innerHTML = '';
+            }
+        }
+
+        // Use DOMContentLoaded for faster execution instead of waiting for all resources
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPage);
+        } else {
+            initPage();
+        }
+    </script>
+
+</body>
+
+</html>

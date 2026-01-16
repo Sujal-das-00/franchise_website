@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Franchises - JSM Franchising</title>
+    <link rel="stylesheet" href="search.css">
+</head>
+<body>
+<link rel="stylesheet" href="search.css">
+
+    <section class="search-filter-container">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search for business opportunity">
+        <button id="searchBtn"><i class="fas fa-search"></i></button>
+    </div>
+
+    <p class="filter-label">Or Explore By Categories</p>
+
+    <div class="filters">
+        <select id="industrySelect">
+            <option value="">Select Industry</option>
+            <option value="Advertising">Advertising</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Beauty & Spa">Beauty & Spa</option>
+            <option value="Business Management & Coaching">Business Management & Coaching</option>
+            <option value="Business Services">Business Services</option>
+            <option value="Catering">Catering</option>
+            <option value="Child Education">Child Education</option>
+            <option value="Child Services">Child Services</option>
+            <option value="Commercial Cleaning">Commercial Cleaning</option>
+            <option value="Computer Technology">Computer Technology</option>
+            <option value="Dry Cleaning-Laundry">Dry Cleaning-Laundry</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Financial Services">Financial Services</option>
+            <option value="Fitness">Fitness</option>
+            <option value="Food & Beverage">Food & Beverage</option>
+            <option value="HVAC">HVAC</option>
+            <option value="Home Inspection">Home Inspection</option>
+            <option value="Home Services">Home Services</option>
+            <option value="IT Services">IT Services</option>
+            <option value="Lawn & Garden">Lawn & Garden</option>
+            <option value="Locksmith">Locksmith</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Moving & Storage">Moving & Storage</option>
+            <option value="Painting">Painting</option>
+            <option value="Pest Control">Pest Control</option>
+            <option value="Pet Care & Grooming">Pet Care & Grooming</option>
+            <option value="Plumbing">Plumbing</option>
+            <option value="Print, Copy & Mailing">Print, Copy & Mailing</option>
+            <option value="Real Estate">Real Estate</option>
+            <option value="Residential Cleaning">Residential Cleaning</option>
+            <option value="Restoration">Restoration</option>
+            <option value="Retail">Retail</option>
+            <option value="Roofing">Roofing</option>
+            <option value="Security">Security</option>
+            <option value="Senior Care">Senior Care</option>
+            <option value="Signs">Signs</option>
+            <option value="Sports & Recreation">Sports & Recreation</option>
+            <option value="Staffing">Staffing</option>
+            <option value="Vending">Vending</option>
+            <option value="Waste Management">Waste Management</option>
+            <option value="Water Treatment">Water Treatment</option>
+            <option value="Window Cleaning">Window Cleaning</option>
+            <option value="Wellness">Wellness</option>
+        </select>
+
+        <select id="orderSelect">
+            <option value="">Order By</option>
+            <option value="min-low">Sort by Minimum Investment (Low to High)</option>
+            <option value="max-high">Sort by Maximum Investment (High to Low)</option>
+            <option value="outlets">Sort by Number of Outlets</option>
+            <option value="alpha">Alphabetical (A-Z)</option>
+        </select>
+
+        <button class="btn-explore" id="exploreBtn">Explore</button>
+        <span class="clear-all" id="clearBtn">Clear all</span>
+    </div>
+</section>
+<script src="search.js"></script>

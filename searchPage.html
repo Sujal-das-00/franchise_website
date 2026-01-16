@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSM Franchising - Search Results</title>
+    <link rel="stylesheet" href="searchPage.css">
+    <style>
+        .main-header {
+            background-color: var(--header-bg);
+            padding: 15px 0;
+            width: 100%;
+            background-color: #e8f3e9;
+
+        }
+
+        .header-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        /* Logo */
+        .logo img {
+            height: 55px;
+            /* Adjust based on your actual image size */
+            display: block;
+        }
+
+        /* Nav Menu */
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu ul li a:hover {
+            color: var(--primary-green);
+        }
+
+        .search-link i {
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        /* Let's Talk Button */
+        .btn-talk {
+            background-color: #fff;
+            color: #1a2b3c;
+            border: 1.5px solid var(--primary-green);
+            padding: 12px 35px;
+            border-radius: 50px;
+            /* High radius for the pill shape */
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-talk:hover {
+            background-color: var(--primary-green);
+            color: #fff;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+
+            /* Standard practice for mobile burger menus */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="JSM Franchising">
+            </div>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Business Assessment</a></li>
+                    <li><a href="#">Funding Calculator</a></li>
+                    <li>
+                        <a href="#" class="search-link" onclick="openSearchModal(); return false;"> Search
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-cta">
+                <button class="btn-talk">Let's Talk</button>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+         <div class="search-header">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input"
+                    placeholder="Search franchises by name, category, or investment...">
+
+            </div>
+
+
+            <div class="results-info">
+                <span id="results-count">0 results found</span>
+            </div>
+        </div>
+
+        <!-- Hidden inline search UI - Search should only be accessible through navbar popup -->
+        <section class="search-filter-containe">
+            <div class="filters">
+                <select id="industrySelect">
+                    <option value="">Select Industry</option>
+                    <option value="Advertising">Advertising</option>
+                    <option value="Automotive">Automotive</option>
+                    <option value="Beauty & Spa">Beauty & Spa</option>
+                    <option value="Business Management & Coaching">Business Management & Coaching</option>
+                    <option value="Business Services">Business Services</option>
+                    <option value="Catering">Catering</option>
+                    <option value="Child Education">Child Education</option>
+                    <option value="Child Services">Child Services</option>
+                    <option value="Commercial Cleaning">Commercial Cleaning</option>
+                    <option value="Computer Technology">Computer Technology</option>
+                    <option value="Dry Cleaning-Laundry">Dry Cleaning-Laundry</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Financial Services">Financial Services</option>
+                    <option value="Fitness">Fitness</option>
+                    <option value="Food & Beverage">Food & Beverage</option>
+                    <option value="HVAC">HVAC</option>
+                    <option value="Home Inspection">Home Inspection</option>
+                    <option value="Home Services">Home Services</option>
+                    <option value="IT Services">IT Services</option>
+                    <option value="Lawn & Garden">Lawn & Garden</option>
+                    <option value="Locksmith">Locksmith</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Moving & Storage">Moving & Storage</option>
+                    <option value="Painting">Painting</option>
+                    <option value="Pest Control">Pest Control</option>
+                    <option value="Pet Care & Grooming">Pet Care & Grooming</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Print, Copy & Mailing">Print, Copy & Mailing</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Residential Cleaning">Residential Cleaning</option>
+                    <option value="Restoration">Restoration</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Roofing">Roofing</option>
+                    <option value="Security">Security</option>
+                    <option value="Senior Care">Senior Care</option>
+                    <option value="Signs">Signs</option>
+                    <option value="Sports & Recreation">Sports & Recreation</option>
+                    <option value="Staffing">Staffing</option>
+                    <option value="Vending">Vending</option>
+                    <option value="Waste Management">Waste Management</option>
+                    <option value="Water Treatment">Water Treatment</option>
+                    <option value="Window Cleaning">Window Cleaning</option>
+                    <option value="Wellness">Wellness</option>
+                </select>
+
+                <select id="orderSelect">
+                    <option value="">Order By</option>
+                    <option value="min-low">Sort by Minimum Investment (Low to High)</option>
+                    <option value="max-high">Sort by Maximum Investment (High to Low)</option>
+                    <option value="outlets">Sort by Number of Outlets</option>
+                    <option value="alpha">Alphabetical (A-Z)</option>
+                </select>
+
+                <button class="btn-explore" id="exploreBtn">Explore</button>
+                <span class="clear-all" id="clearBtn">Clear all</span>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+       
+
+        <div id="results-grid" class="results-grid">
+        </div>
+
+        <footer class="pagination">
+            <button class="btn-prev" disabled>
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <div class="pages">
+                <span class="page-num active">1</span>
+            </div>
+            <button class="btn-next">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </footer>
+    </main>
+
+    <!-- Fallback data for when not running on a server -->
+    <script id="franchise-data" type="application/json">
+        [
+            {
+                "id": 0,
+                "name": "4Ever Young",
+                "category": "Beauty & Spa / Wellness",
+                "logo": "https://upload.wikimedia.org/wikipedia/commons/1/10/4Ever_Young_logo.png",
+                "description": "4Ever Young Anti-Aging Solutions, founded in 2014 in Boca Raton, Florida, has rapidly become a leader in the wellness and aesthetic franchise sector. Combining advanced anti-aging treatments—like hormone replacement therapy, Botox, dermal fillers, and IV vitamin therapy—with a holistic approach to health, the brand helps clients look and feel their best at any age. The franchise supports each center with comprehensive training, operational guidance, and an integrated business model that blends beauty and wellness services, making it a compelling opportunity for entrepreneurs who want to make a meaningful impact in the fast-growing med spa industry. Their combination of proven results and personalized care has helped fuel rapid nationwide expansion.",
+                "avgInvestment": "$650,000",
+                "minInvestment": "$386,750",
+                "minLiquidity": "$400,000",
+                "yearEstablished": "2014",
+                "outlets": "65+",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 1,
+                "name": "NTV360",
+                "category": "Advertising & Marketing",
+                "logo": "https://ntv360franchise.com/hs-fs/hubfs/NTV360%20Logo.png?width=400&name=NTV360%20Logo.png",
+                "description": "NTV360 is a turnkey digital advertising franchise specializing in high-impact indoor digital billboards. By placing screens in high-traffic community venues like restaurants and medical offices, franchisees provide a valuable platform for local businesses to reach their target audience. This home-based, semi-passive business model offers recurring revenue with no inventory, no employees, and no storefront requirements. With exclusive territories and comprehensive training, NTV360 empowers entrepreneurs to build a scalable advertising network while supporting the growth of local small businesses through innovative visual communication and professional digital marketing solutions.",
+                "avgInvestment": "$84,277",
+                "minInvestment": "$48,150",
+                "minLiquidity": "$50,000",
+                "yearEstablished": "2022",
+                "outlets": "2",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 2,
+                "name": "Big Frog Custom T-Shirts",
+                "category": "Advertising & Marketing",
+                "logo": "https://www.bigfrog.com/wp-content/uploads/2021/05/big-frog-logo-2.png",
+                "description": "Big Frog Custom T-Shirts & More specializes in Direct-to-Garment (DTG) printing, offering custom apparel with no minimums and fast turnaround times. This retail-based franchise combines creative design services with high-quality garment printing for individuals, schools, and businesses. With a proven business model and high customer loyalty, it operates in a fun, high-energy environment. Franchisees benefit from comprehensive training and a community-focused brand that simplifies the custom apparel process.",
+                "avgInvestment": "$243,548",
+                "minInvestment": "$163,987",
+                "minLiquidity": "$250,000",
+                "yearEstablished": "2008",
+                "outlets": "75",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 3,
+                "name": "FastSigns",
+                "category": "Signs & Graphics",
+                "logo": "https://www.fastsigns.com/Images/fastsigns-logo.png",
+                "description": "FastSigns is a global leader in the sign and visual communications industry. The franchise provides comprehensive solutions including wall and floor graphics, architectural signage, and digital displays. With over 35 years of experience, FastSigns helps businesses of all sizes increase their visibility. Franchisees operate in a B2B environment with professional Monday-Friday hours. The brand offers world-class support, advanced technology systems, and a highly recognized name in the commercial signage market.",
+                "avgInvestment": "$296,264",
+                "minInvestment": "$215,194",
+                "minLiquidity": "$80,000",
+                "yearEstablished": "1985",
+                "outlets": "760",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 4,
+                "name": "Signarama",
+                "category": "Signs & Graphics",
+                "logo": "https://signarama.com/assets/images/signarama-logo.svg",
+                "description": "Signarama is the world's largest sign franchise, offering a wide array of branding and marketing services. From vehicle wraps to storefront signs and digital messaging, they serve as a full-service partner for business growth. As part of United Franchise Group, owners benefit from massive global brand recognition and extensive vendor networks. The model is designed for scalability in the B2B sector, providing vital communication tools to local and national companies alike.",
+                "avgInvestment": "$307,652",
+                "minInvestment": "$259,595",
+                "minLiquidity": "$60,000",
+                "yearEstablished": "1986",
+                "outlets": "700",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 5,
+                "name": "AAMCO",
+                "category": "Automotive",
+                "logo": "https://www.aamco.com/images/aamco-logo.png",
+                "description": "AAMCO is the world's leader in transmission repairs and a premier provider of total car care. For over 50 years, the brand has built a reputation for technical expertise and reliable service. The franchise model has evolved to include comprehensive auto maintenance, ensuring multiple revenue streams. Franchisees leverage a household name, sophisticated diagnostic technology, and a dedicated training academy to lead their local automotive repair markets with confidence and authority.",
+                "avgInvestment": "$331,650",
+                "minInvestment": "$263,100",
+                "minLiquidity": "$90,000",
+                "yearEstablished": "1962",
+                "outlets": "550",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 6,
+                "name": "RNR Tire Express",
+                "category": "Automotive",
+                "logo": "https://www.rnrtires.com/wp-content/themes/rnr-tires/assets/images/logo.png",
+                "description": "RNR Tire Express is a national leader in the tire and wheel industry, known for its unique 'pay-as-you-go' payment options. This model makes high-quality tires and custom wheels accessible to a broader consumer base. Franchisees operate retail hubs that combine essential automotive products with exceptional customer service. With high demand and a proven recurring revenue stream, RNR offers a robust opportunity in the recession-resistant automotive aftermarket sector.",
+                "avgInvestment": "$1,199,418",
+                "minInvestment": "$711,561",
+                "minLiquidity": "$500,000",
+                "yearEstablished": "2000",
+                "outlets": "160",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 7,
+                "name": "Glass Doctor",
+                "category": "Automotive",
+                "logo": "https://glassdoctor.com/sites/default/files/glass-doctor-logo.png",
+                "description": "Glass Doctor provides specialized glass repair and replacement services for home, auto, and business applications. As part of the Neighborly brand family, franchisees benefit from a massive cross-marketing network and sophisticated operational systems. The brand is recognized for its professional standards and diverse revenue streams. Owners enjoy a flexible business model that can be scaled from a mobile-only operation to a full-service retail location with specialized technicians.",
+                "avgInvestment": "$239,250",
+                "minInvestment": "$155,400",
+                "minLiquidity": "$350,000",
+                "yearEstablished": "1962",
+                "outlets": "175",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 8,
+                "name": "1-800-Radiator & A/C",
+                "category": "Automotive",
+                "logo": "https://www.1800radiator.com/images/logo.png",
+                "description": "1-800-Radiator & A/C is a dominant automotive parts distribution franchise specializing in radiators, air conditioning components, and cooling systems. The business model focuses on high-efficiency warehousing and rapid delivery to local repair shops. Franchisees leverage advanced inventory management software and a powerful national brand to capture market share. This B2B opportunity offers a proven system for entrepreneurs to manage high-volume sales within the stable automotive maintenance industry.",
+                "avgInvestment": "$863,250",
+                "minInvestment": "$457,500",
+                "minLiquidity": "$100,000",
+                "yearEstablished": "2004",
+                "outlets": "200",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            },
+            {
+                "id": 9,
+                "name": "Victory Lane Quick Oil Change",
+                "category": "Automotive",
+                "logo": "https://victorylane.com/wp-content/uploads/2019/04/Victory-Lane-Logo.png",
+                "description": "Victory Lane Quick Oil Change is one of the oldest and most respected quick lube franchises in the U.S. They specialize in fast, high-quality preventive maintenance services, including oil changes and fluid replacements. The model is built for speed and efficiency, catering to busy modern consumers. Franchisees benefit from a streamlined operational system, strong vendor relationships, and a brand identity that emphasizes trust and speed in the automotive service market.",
+                "avgInvestment": "$467,250",
+                "minInvestment": "$240,000",
+                "minLiquidity": "$125,000",
+                "yearEstablished": "1980",
+                "outlets": "35",
+                "inHouseFinancing": "Yes",
+                "coaching": "Yes"
+            }
+        ]
+    </script>
+
+    <script src="searchPage.js"></script>
+</body>
+
+</html>
