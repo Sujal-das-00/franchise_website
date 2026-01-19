@@ -232,62 +232,7 @@
             gap: 25px;
         }
 
-        /* Card Styles */
-        .card {
-            border: 1px solid #fce4ec;
-            border-radius: 15px;
-            padding: 25px;
-            transition: transform 0.3s;
-            background: #fff;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .card-logo-placeholder {
-            height: 80px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .card-logo-placeholder img {
-            max-width: 70%;
-        }
-
-        .card-cat {
-            font-size: 12px;
-            color: #999;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .card-name {
-            font-size: 1.2rem;
-            margin: 5px 0 15px 0;
-            color: var(--navy);
-        }
-
-        .card-stats-list {
-            font-size: 13px;
-            color: #555;
-            list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-
-        .card-stats-list li {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-
+        
         .know-more-btn {
             width: 100%;
             padding: 10px;
@@ -430,7 +375,107 @@
             text-decoration: none;
             font-weight: bold;
         }
+
+        .main-cta-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0 -20px 0;
+            /* Adjusts spacing between showcase and stats */
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-know-more-btn {
+            background: white;
+
+            color: rgb(0, 0, 0);
+            padding: 14px 40px;
+            border: 1px solid #179248;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .main-know-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            background: #179248;
+            color: white;
+        }
+        .card-description{
+    color: #4a4e69;
+    text-align: left;
+    max-height: 100px;
+    min-height: 75px;
+    font-size: small;
+
+}.card {
+    border: 2px solid #ffe5e5;
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    text-align: left;
+}
+.card-image-box {
+    border: 1px solid #eee;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+.category { font-size: 12px; color: #888; margin-bottom: 5px; }
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+.card-description{
+    color: #4a4e69;
+    text-align: left;
+    max-height: 100px;
+    min-height: 75px;
+    font-size: small;
+    
+}
+.card-image-box img { max-width: 80%; }
+.btn-know-more {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--primary-green);
+    color: var(--primary-green);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.card-image-box {
+    border: 1px solid #eee;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+.btn-know-more:hover {
+    background: var(--primary-green);
+    color: white;
+}
+
+
+
     </style>
+    <!-- <link rel="stylesheet" href="searchPage.css"> -->
 </head>
 
 <body>
@@ -438,7 +483,8 @@
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <img src="images/logo.png" alt="JSM Franchising">
+                <img src="https://res.cloudinary.com/dw1nrygug/image/upload/v1768548114/logo_gl1n0s.png"
+                    alt="JSM Franchising">
             </div>
 
             <nav class="nav-menu">
@@ -466,6 +512,7 @@
             <div class="brand-description">
                 <h3 id="brand-header-title">About Brand</h3>
                 <p id="brand-desc-text">Loading description...</p>
+                <button onclick="window.location.href='google.forms'" class="main-know-more-btn">Know More</button>
             </div>
         </section>
 
@@ -542,7 +589,8 @@
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-left">
-                <img src="images/logo.png" alt="JSM Franchising Logo" class="footer-logo" width="90px">
+                <img src="https://res.cloudinary.com/dw1nrygug/image/upload/v1768829661/Colored-removebg-preview_gjcwmw.png"
+                    alt="JSM Franchising Logo" class="footer-logo" width="180px">
             </div>
             <div class="footer-center">
                 <p>Copyright JSM Franchising. All right reserved | Designed by Sual das</p>
@@ -611,24 +659,55 @@
                 }
 
                 // Use document fragment for better performance when adding multiple elements
+                // const fragment = document.createDocumentFragment();
+                // randomItems.forEach(item => {
+                //     const card = document.createElement('div');
+                //     card.className = 'card';
+                //     card.innerHTML = `
+                //     <div class="card-logo-placeholder"><img src="${item.logo}" loading="lazy"></div>
+                //     <div class="card-cat">${item.category}</div>
+                //     <div class="card-name">${item.name}</div>
+                //     <ul class="card-stats-list">
+                //         <li><span>Average Investment</span> <strong>${item.avgInvestment}</strong></li>
+                //         <li><span>Minimum Investment</span> <strong>${item.minInvestment}</strong></li>
+                //         <li><span>Franchise outlets</span> <strong>${item.outlets}</strong></li>
+                //     </ul>
+                //     <button class="know-more-btn" onclick="window.location.href='?id=${item.id}'">Know More</button>
+                // `;
+                //     fragment.appendChild(card);
+                // });
+                // grid.appendChild(fragment);
+
                 const fragment = document.createDocumentFragment();
+
                 randomItems.forEach(item => {
                     const card = document.createElement('div');
                     card.className = 'card';
+                    const maxWords = 25;
+                    const words = item.description ? item.description.split(" ") : [];
+                    const shortDescription = words.length > maxWords
+                        ? words.slice(0, maxWords).join(" ") + " ....."
+                        : words.join(" ");
                     card.innerHTML = `
-                    <div class="card-logo-placeholder"><img src="${item.logo}" loading="lazy"></div>
-                    <div class="card-cat">${item.category}</div>
-                    <div class="card-name">${item.name}</div>
-                    <ul class="card-stats-list">
-                        <li><span>Average Investment</span> <strong>${item.avgInvestment}</strong></li>
-                        <li><span>Minimum Investment</span> <strong>${item.minInvestment}</strong></li>
-                        <li><span>Franchise outlets</span> <strong>${item.outlets}</strong></li>
-                    </ul>
-                    <button class="know-more-btn" onclick="window.location.href='?id=${item.id}'">Know More</button>
-                `;
-                    fragment.appendChild(card);
-                });
-                grid.appendChild(fragment);
+            <div class="card-image-box">
+                <img src="${item.logo}" alt="${item.name}" loading="lazy">
+            </div>
+            <div class="category">${item.category}</div>
+            <div class="card-title">${item.name}</div>
+            <hr>
+            <div class="card-description">
+                ${shortDescription}
+            </div>
+
+            <button class="btn-know-more" 
+                onclick="location.href='franchiseInfo.html?id=${item.id}'">
+                Know More
+            </button>
+        `;
+        fragment.appendChild(card);
+        });
+
+        grid.appendChild(fragment);
 
             } catch (error) {
                 console.error("Error loading franchise data:", error);

@@ -11,7 +11,7 @@ async function loadFranchises() {
 }
 
 function applyFilters() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const industry = document.getElementById('industrySelect').value;
     const orderBy = document.getElementById('orderSelect').value;
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (clearBtn) {
         clearBtn.addEventListener('click', () => {
-            document.getElementById('searchInput').value = "";
+            document.getElementById('search-input').value = "";
             document.getElementById('industrySelect').value = "";
             document.getElementById('orderSelect').value = "";
             renderCards(allFranchises);
@@ -58,14 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Re-render function
 function renderCards(items) {
-    // This function will be implemented when we have the actual card rendering logic
-    // For now, we'll just log the filtered results
     console.log('Filtered franchises:', items);
-    
-    // If this is being used in a modal context, we might want to pass results
-    // to the parent window or handle them differently
     if (window.opener) {
-        // Handle results in parent window
         console.log('Results available for parent window');
     }
 }

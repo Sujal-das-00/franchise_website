@@ -42,6 +42,14 @@ nav a {
     color: var(--dark-blue);
     cursor: pointer;
 }
+.card-description{
+    color: #4a4e69;
+    text-align: left;
+    max-height: 100px;
+    min-height: 75px;
+    font-size: small;
+    
+}
 
 /* Main Content */
 .container {

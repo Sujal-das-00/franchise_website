@@ -68,39 +68,43 @@
     }
 
     // DOM manipulation optimizations
-    function createCardFragment(items) {
-        const fragment = document.createDocumentFragment();
-        
-        items.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="card-image-box">
-                    <img src="${item.logo}" alt="${item.name}" loading="lazy">
-                </div>
-                <div class="category">${item.category}</div>
-                <div class="card-title">${item.name}</div>
-                
-                <div class="stat-row">
-                    <span>Average investment</span>
-                    <span class="stat-value">${item.avgInvestment}</span>
-                </div>
-                <div class="stat-row">
-                    <span>Minimum Investment</span>
-                    <span class="stat-value">${item.minInvestment}</span>
-                </div>
-                <div class="stat-row">
-                    <span>Franchise outlets</span>
-                    <span class="stat-value">${item.outlets}</span>
-                </div>
+   function createCardFragment(items) {
+    const fragment = document.createDocumentFragment();
 
-                <button class="btn-know-more" onclick="location.href='franchiseInfo.html?id=${item.id}'">Know More</button>
-            `;
-            fragment.appendChild(card);
-        });
-        
-        return fragment;
-    }
+    items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        // --- Short description logic (10–20 words) ---
+        const maxWords = 25;
+        const words = item.description ? item.description.split(" ") : [];
+        const shortDescription = words.length > maxWords
+            ? words.slice(0, maxWords).join(" ") + " ....."
+            : words.join(" ");
+
+        card.innerHTML = `
+            <div class="card-image-box">
+                <img src="${item.logo}" alt="${item.name}" loading="lazy">
+            </div>
+            <div class="category">${item.category}</div>
+            <div class="card-title">${item.name}</div>
+            <hr>
+            <div class="card-description">
+                ${shortDescription}
+            </div>
+
+            <button class="btn-know-more" 
+                onclick="location.href='franchiseInfo.html?id=${item.id}'">
+                Know More
+            </button>
+        `;
+
+        fragment.appendChild(card);
+    });
+
+    return fragment;
+}
+
 
     // Main loading function with URL parameter support
     async function loadFranchises() {
@@ -280,6 +284,20 @@
         return match ? parseInt(match[0], 10) : 0;
     }
     
+    // Reusable function that applies all filters (extracted from Explore button logic)
+    function applyFilters() {
+        const searchInput = document.getElementById('search-input');
+        const industrySelect = document.getElementById('industrySelect');
+        const orderSelect = document.getElementById('orderSelect');
+        
+        const searchTerm = searchInput ? searchInput.value.trim() : '';
+        const industry = industrySelect ? industrySelect.value : '';
+        const order = orderSelect ? orderSelect.value : '';
+        
+        // Apply filters and sorting together in a single pass
+        applyFiltersAndSorting(searchTerm, industry, order);
+    }
+    
     // Enhanced search functionality with full filtering
     function performSearch(searchTerm) {
         const industrySelect = document.getElementById('industrySelect');
@@ -350,46 +368,37 @@
 
     // Event listener setup
     function setupEventListeners() {
-        // Debounced search input
-        const searchInput = document.getElementById('search-input');
-        if (searchInput) {
-            const debouncedSearch = debounce((e) => {
-                performSearch(e.target.value);
-            }, CONFIG.debounceDelay);
-            searchInput.addEventListener('input', debouncedSearch);
-            state.eventListeners.set('searchInput', debouncedSearch);
-        }
-
         // Initialize search form events
         initializeSearchFormEvents();
     }
 
     // Initialize search form event handlers
     function initializeSearchFormEvents() {
-        const searchInput = document.getElementById('searchInput');
+        const searchInput = document.getElementById('search-input');
         const industrySelect = document.getElementById('industrySelect');
         const orderSelect = document.getElementById('orderSelect');
         const exploreBtn = document.getElementById('exploreBtn');
         const clearBtn = document.getElementById('clearBtn');
         const searchBtn = document.getElementById('searchBtn');
         
-        // Search input handler
+        // Search input handler - attach applyFilters directly
         if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                performSearch(e.target.value);
-            });
+            searchInput.addEventListener('input', applyFilters);
         }
         
-        // Explore button handler
+        // Industry dropdown change handler
+        if (industrySelect) {
+            industrySelect.addEventListener('change', applyFilters);
+        }
+        
+        // Order-by dropdown change handler
+        if (orderSelect) {
+            orderSelect.addEventListener('change', applyFilters);
+        }
+        
+        // Explore button handler - keep for backward compatibility
         if (exploreBtn) {
-            exploreBtn.addEventListener('click', () => {
-                const searchTerm = searchInput ? searchInput.value.trim() : '';
-                const industry = industrySelect ? industrySelect.value : '';
-                const order = orderSelect ? orderSelect.value : '';
-                
-                // Apply filters and sorting together in a single pass
-                applyFiltersAndSorting(searchTerm, industry, order);
-            });
+            exploreBtn.addEventListener('click', applyFilters);
         }
         
         // Clear button handler
@@ -399,7 +408,7 @@
             });
         }
         
-        // Search button handler (magnifying glass)
+        // Search button handler (magnifying glass) - keep existing behavior
         if (searchBtn) {
             searchBtn.addEventListener('click', () => {
                 const searchTerm = searchInput ? searchInput.value.trim() : '';
